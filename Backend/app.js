@@ -1,14 +1,19 @@
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 dotenv.config();
-const express = require ('express');
+import express from 'express';
+import cors from 'cors';
 const app = express();
-const cors = require('cors');
+import connectToDb from './db/db.js';
+
 app.use(cors());
+
+connectToDb();
 
 app.get('/',(req,res)=>{
     res.send('Hello World');
 });
 
-module.exports= app;
+// module.exports= app;
+export default app;
 
 
