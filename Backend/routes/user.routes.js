@@ -1,6 +1,9 @@
 import express from 'express';
 const router = express.Router();
 import { registerUser } from '../controller/user.controller.js';
+import { loginUser } from '../controller/user.controller.js';
+import { getUserProfile } from '../controller/user.controller.js';
+import { authUser } from '../middleware/auth.middleware.js';
 import {body} from 'express-validator';
 
 
@@ -12,6 +15,15 @@ router.post('/register',[
 ],
     registerUser
 )
+
+router.post('/login', [
+    body('email').isEmail().withMessage('Invalid Email'),
+    body('password').isLength({min : 6}).withMessage('Incorrect password')
+],
+    loginUser
+)
+
+router.get('/profile', authUser ,getUserProfile)
 
 
 export default router;

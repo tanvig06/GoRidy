@@ -5,6 +5,7 @@ import cors from 'cors';
 const app = express();
 import connectToDb from './db/db.js';
 import userRoutes from './routes/user.routes.js'
+import cookieParser from 'cookie-parser';
 
 app.use(cors());
 app.use(express.json());
