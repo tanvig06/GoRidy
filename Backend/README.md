@@ -228,6 +228,114 @@ Returned when credentials are invalid.
 
 **Status Code:** `500 Internal Server Error`
 
+### GET /users/profile
+
+#### Description
+Returns the authenticated user's profile. Requires a valid JWT provided either in the `token` cookie or the `Authorization: Bearer <token>` header.
+
+#### Request
+
+**Method:** `GET`
+
+**URL:** `/users/profile`
+
+**Headers / Cookies:**
+
+- Send cookie: `token=<jwt>` or
+- Header: `Authorization: Bearer <jwt>`
+
+#### Responses
+
+##### Success (200 OK)
+
+```json
+{
+  "_id": "676f43219c53a00001234567",
+  "fullname": {
+    "firstName": "John",
+    "lastName": "Doe"
+  },
+  "email": "john.doe@example.com"
+}
+```
+
+**Status Code:** `200 OK`
+
+##### Unauthorized (401 Unauthorized)
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+**Status Code:** `401 Unauthorized`
+
+#### Example Request (cookie)
+
+```bash
+curl -X GET http://localhost:3000/users/profile \
+  -b "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
+
+#### Example Request (header)
+
+```bash
+curl -X GET http://localhost:3000/users/profile \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
+
+### GET /users/logout
+
+#### Description
+Logs out the authenticated user by clearing the `token` cookie and storing the JWT in the blacklist so it cannot be reused. Accepts the JWT in the `token` cookie or the `Authorization: Bearer <token>` header.
+
+#### Request
+
+**Method:** `GET`
+
+**URL:** `/users/logout`
+
+**Headers / Cookies:**
+
+- Send cookie: `token=<jwt>` or
+- Header: `Authorization: Bearer <jwt>`
+
+#### Responses
+
+##### Success (200 OK)
+
+```json
+{
+  "message": "Logged out"
+}
+```
+
+**Status Code:** `200 OK`
+
+##### Unauthorized (401 Unauthorized)
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+**Status Code:** `401 Unauthorized`
+
+#### Example Request (cookie)
+
+```bash
+curl -X GET http://localhost:3000/users/logout \
+  -b "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
+
+#### Example Request (header)
+
+```bash
+curl -X GET http://localhost:3000/users/logout \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
 
 ### POST /users/login
 
