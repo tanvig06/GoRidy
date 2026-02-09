@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import { jwt } from "jsonwebtoken";
 
 const captainSchema = new mongoose.Schema({
+    
 
     fullname: {
         firstName : {
